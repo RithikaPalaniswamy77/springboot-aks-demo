@@ -1,15 +1,14 @@
-# Use a lightweight OpenJDK 17 base image
-FROM eclipse-temurin:17-jdk-jammy
-
-# Set the working directory inside the container
+# Stage 1: Build the JAR
+FROM maven:3.9.3-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Define an argument for the JAR file name (assuming a Maven build outputs to target/)
-ARG JAR_FILE=target/AKS-Handson-0.0.1-SNAPSHOT.jar
-
-# Copy the JAR file from the host to the container filesystem
-COPY ${JAR_FILE} app.jar
-
+# Stage 2: Create runtime image
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/target/AKS-Handson-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 7001
-# Define the command to run the application when the container starts
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
+
