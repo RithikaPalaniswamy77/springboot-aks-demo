@@ -2,19 +2,26 @@ trigger:
 - main
 
 variables:
-  imageName: aks-handson
   acrName: rithikaaksacr
+  imageName: aks-handson
+  imageTag: v1
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Docker@2
-  displayName: Build and Push Image
+- task: AzureCLI@2
+  displayName: Build and Push Docker Image to ACR
   inputs:
-    containerRegistry: acr-aks-connection
-    repository: $(imageName)
-    command: buildAndPush
-    Dockerfile: Dockerfile
-    tags: |
-      v1
+    azureSubscription: acr-aks-connection   
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      echo "Logging into ACR"
+      az acr login --name $(acrName)
+
+      echo "Building Docker image"
+      docker build -t $(acrName).azurecr.io/$(imageName):$(imageTag) .
+
+      echo "Pushing Docker image"
+      docker push $(acrName).azurecr.io/$(imageName):$(imageTag)
