@@ -1,0 +1,20 @@
+trigger:
+- main
+
+variables:
+  imageName: aks-handson
+  acrName: rithikaaksacr
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Docker@2
+  displayName: Build and Push Image
+  inputs:
+    containerRegistry: acr-aks-connection
+    repository: $(imageName)
+    command: buildAndPush
+    Dockerfile: Dockerfile
+    tags: |
+      v1
