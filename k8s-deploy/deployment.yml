@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-handson-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-handson
+  template:
+    metadata:
+      labels:
+        app: aks-handson
+    spec:
+      containers:
+      - name: aks-handson
+        image: rithikaaksacr-bqdhbaexbqbth8gt.azurecr.io/aks-handson:v1
+        ports:
+        - containerPort: 7001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-handson-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: aks-handson
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 7001
