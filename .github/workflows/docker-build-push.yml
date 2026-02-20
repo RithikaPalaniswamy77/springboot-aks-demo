@@ -37,6 +37,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+
       # ☸️ Get AKS Credentials
       - name: Set AKS context
         run: |
@@ -45,9 +46,10 @@ jobs:
             --name ${{ secrets.AKS_CLUSTER_NAME }} \
             --overwrite-existing
 
+
       # 🎯 Deploy with Helm
       - name: Deploy using Helm
         run: |
-          helm upgrade --install aks-handson-release ./helm \
+          helm upgrade --install aks-handson-release ./helm-deploy \
             --set image.repository=${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.IMAGE_NAME }} \
             --set image.tag=${{ github.sha }}
