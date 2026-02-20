@@ -14,6 +14,6 @@ spec:
             prefix: "/api"          # route all traffic
       route:
         - destination:
-            host: aks-handson-service   # Kubernetes service name of your API
+            host: aks-handson-service.default.svc.cluster.local   # Kubernetes service name of your API
             port:
               number: 80         # port your API pod exposes
