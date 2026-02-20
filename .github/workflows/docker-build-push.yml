@@ -50,6 +50,6 @@ jobs:
       # 🎯 Deploy with Helm
       - name: Deploy using Helm
         run: |
-          helm upgrade --install aks-handson-release ./helm-deploy \
+          helm upgrade --install aks-handson-release ./helm-deploy/AKS-Handson \
             --set image.repository=${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.IMAGE_NAME }} \
             --set image.tag=${{ github.sha }}
