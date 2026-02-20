@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   hosts:
-    - "20.237.1.89"             # same as Gateway
+    - "*"             # same as Gateway
   gateways:
     - aks-handson-gateway
   http:
