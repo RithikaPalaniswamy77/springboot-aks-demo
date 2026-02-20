@@ -11,7 +11,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: "/"          # route all traffic
+            prefix: "/api"          # route all traffic
       route:
         - destination:
             host: aks-handson-service   # Kubernetes service name of your API
