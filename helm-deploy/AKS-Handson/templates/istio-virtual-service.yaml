@@ -16,4 +16,4 @@ spec:
         - destination:
             host: aks-handson-service   # Kubernetes service name of your API
             port:
-              number: 8080         # port your API pod exposes
+              number: 80         # port your API pod exposes
