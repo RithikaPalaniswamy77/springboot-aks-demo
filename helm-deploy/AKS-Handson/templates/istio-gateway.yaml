@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: aks-handson-gateway
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway        # use Istio ingress gateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "20.237.1.89"          # temporary testing host
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: aks-handson-tls-cert  # only needed if you have a TLS secret
+      hosts:
+        - "20.237.1.89"          # same host as above

@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: aks-handson-vs
+  namespace: default
+spec:
+  hosts:
+    - "20.237.1.89"             # same as Gateway
+  gateways:
+    - aks-handson-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"          # route all traffic
+      route:
+        - destination:
+            host: aks-handson-service   # Kubernetes service name of your API
+            port:
+              number: 8080         # port your API pod exposes
