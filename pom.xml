@@ -48,11 +48,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.splunk.logging</groupId>
 			<artifactId>splunk-library-javalogging</artifactId>
 			<version>1.11.8</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.launchdarkly</groupId>
 			<artifactId>launchdarkly-java-server-sdk</artifactId>
