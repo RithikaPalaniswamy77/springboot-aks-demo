@@ -9,12 +9,10 @@ import com.launchdarkly.sdk.server.LDClient;
 @Configuration
 public class LaunchDarklyConfig {
 	
-	@Value("${launchdarkly.sdk.key}")
-	private String ldKey;
-	
-	@Bean
-	public LDClient ldClient() {
-		return new LDClient(ldKey);
-	}
+	/*
+	 * @Value("${launchdarkly.sdk.key}") private String ldKey;
+	 * 
+	 * @Bean public LDClient ldClient() { return new LDClient(ldKey); }
+	 */
 
 }
